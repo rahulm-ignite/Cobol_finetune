@@ -8,18 +8,25 @@ import json
 
 def read_cobol_files(directory):
     # Create a pattern to match all COBOL files, assuming .cbl as the file extension
-    pattern = os.path.join(directory, '*.cob')
+
+    
+    cobol_files = []  # List to store the paths of COBOL files
+    for root, dirs, files in os.walk(directory):
+        for file in files:
+            if file.endswith('.cob') or file.endswith('.cbl') or file.endswith('*.cpy'):
+                cobol_files.append(os.path.join(root, file))
     
     # Find all files in the directory matching the pattern
-    cobol_files = glob.glob(pattern)
-    
+
+  #  print(cobol_files)
     # List to store messages in the required JSON format
     final_json = []
     
     for file_path in cobol_files:
         messages = []
         # Read the content of the file
-        with open(file_path, 'r', encoding='utf-8') as file:
+        print(file_path)
+        with open(file_path, 'r') as file:
             content = file.read()
         
         length = int(round(.7*len(content),0))
@@ -44,11 +51,11 @@ def read_cobol_files(directory):
     return final_json
 
 # Usage: Replace 'path_to_directory' with the actual path to the directory containing COBOL files
-directory_path = '/Users/rahulmahajan/Desktop/IgniteTech/5_Projects/2_Cobol/Cobol_finetune/X-COBOL/COBOL_Files/Apress_cobol-VB-on-.net'
+directory_path = './X-COBOL'
 formatted_json = read_cobol_files(directory_path)
 # Write the list of messages to a JSON file
 output_file = 'output_messages.txt'
-with open(output_file, 'a', encoding='utf-8') as f:
+with open(output_file, 'w', encoding='utf-8') as f:
     for j in formatted_json:
         f.write(str(j))
         f.write("\n")
