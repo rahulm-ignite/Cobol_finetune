@@ -48,5 +48,7 @@ directory_path = '/Users/rahulmahajan/Desktop/IgniteTech/5_Projects/2_Cobol/Cobo
 formatted_json = read_cobol_files(directory_path)
 # Write the list of messages to a JSON file
 output_file = 'output_messages.txt'
-with open(output_file, 'w', encoding='utf-8') as f:
-    f.write(str(formatted_json))
+with open(output_file, 'a', encoding='utf-8') as f:
+    for j in formatted_json:
+        f.write(str(j))
+        f.write("\n")
