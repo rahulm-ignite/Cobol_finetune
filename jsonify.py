@@ -36,7 +36,7 @@ def read_cobol_files(directory):
         # Append to messages as specified in the JSON structure
         messages.append({
             "role": "system",
-            "content": "You are a COBOL code generator. 70% of the code is given to you. You need to infer the logic and complete the rest 30%."
+            "content": "You are a COBOL code generator. 70% of the code is given to you. You need to infer the logic and complete the rest 30% of the code. The code is strictly in COBOL language. You need to output only the remaining 30% of the code"
         })
         messages.append({
             "role": "user",
