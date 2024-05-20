@@ -25,9 +25,12 @@ def read_cobol_files(directory):
     for file_path in cobol_files:
         messages = []
         # Read the content of the file
-        print(file_path)
-        with open(file_path, 'r') as file:
-            content = file.read()
+    #    print(file_path)
+        try :
+            with open(file_path, 'r') as file:
+                content = file.read()
+        except Exception as e:
+            pass
         
         length = int(round(.7*len(content),0))
         # Append to messages as specified in the JSON structure
