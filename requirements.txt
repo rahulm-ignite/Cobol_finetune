@@ -1,0 +1,7 @@
+ipywidgets
+pandas
+numpy
+sagemaker
+jmespath
+datasets
+ipykernel
