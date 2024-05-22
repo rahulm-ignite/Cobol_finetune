@@ -34,20 +34,21 @@ def read_cobol_files(directory):
         
         length = int(round(.7*len(content),0))
         # Append to messages as specified in the JSON structure
-        messages.append({
-            "prompt":  f"You are a COBOL code generator. 70% of the code is given to you. You need to infer the logic and complete the rest 30% of the code. The code is strictly in COBOL language. You need to output only the remaining 30% of the code \n\n {content[:length]}", "completion" : f"{content[length:]}" })
+        final_json.append({
+            "input":  f"You are a COBOL code generator. 70% of the code is given to you. You need to infer the logic and complete the rest 30% of the code. The code is strictly in COBOL language. You need to output the remaining 30% of the code \n\n {content[:length]}", "output" : f"{content[length:]}" })
      
     
 
-        final_json.append(messages[0])
+      #  final_json.append(messages[0])
     return final_json
 
 # Usage: Replace 'path_to_directory' with the actual path to the directory containing COBOL files
 directory_path = './X-COBOL'
 formatted_json = read_cobol_files(directory_path)
 # Write the list of messages to a JSON file
-output_file = 'output_messages2.txt'
-with open(output_file, 'w', encoding='utf-8') as f:
-    for j in formatted_json:
-        f.write(str(j))
-        f.write("\n")
+
+file_path = 'data.jsonl'
+with open(file_path, 'w') as file:
+    for entry in formatted_json:
+        json.dump(entry, file)
+        file.write('\n')
